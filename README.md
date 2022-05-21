@@ -1,1 +1,1 @@
-# ircd
+# IRCD (InfraRed Control Device)
