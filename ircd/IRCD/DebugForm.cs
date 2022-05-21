@@ -6,20 +6,18 @@ namespace IRCD
 {
     public partial class DebugForm : Form
     {
-        SerialConnector connector_;
-
-        public DebugForm(SerialConnector connector)
+        public DebugForm()
         {
-            connector_ = connector;
-            connector_.LogEvent += ConnectorLogEvent;
-            connector_.FrameReceivedEvent += ConnectorFrameReceivedEvent;
+            SerialConnector.Instance().LogEvent += ConnectorLogEvent;
+            SerialConnector.Instance().FrameReceivedEvent += ConnectorFrameReceivedEvent;
             InitializeComponent();
         }
 
         private void ConnectorFrameReceivedEvent(object sender, SerialConnector.FrameReceivedArgs e)
         {
             //setChart(e.Signature);
-            AddToReceivedFrames(e.Signature);
+            //AddToReceivedFrames(e.Signature);
+            //framesTable.AddToReceivedFrames(e.Signature);
         }
 
         private void ConnectorLogEvent(object sender, SerialConnector.LogArgs e)
@@ -50,45 +48,6 @@ namespace IRCD
         List<double> lastSign = new List<double>();
         //List<string> lastSignCodes = new List<string>();
 
-        private void AddToReceivedFrames(List<double> signature)
-        {
-            var item = lvItems.Items.Add(string.Format("Frame #{0}", nextId));
-            item.Tag = signature;
-            nextId++;
-
-            int maxTimesCount = 0;
-            for (int i = 0; i < lvItems.Items.Count; i++)
-            {
-                var selectedItem = lvItems.Items[i];
-                var sign = selectedItem.Tag as List<double>;
-                if (sign != null)
-                {
-                    if (sign.Count > maxTimesCount)
-                        maxTimesCount = sign.Count;
-                }
-            }
-            if (maxTimesCount + 1 < lvItems.Columns.Count)
-            {
-                lvItems.Columns.Clear();
-            }
-            while (lvItems.Columns.Count < maxTimesCount + 1)
-            {
-                var col = lvItems.Columns.Add(((lvItems.Columns.Count + 1) % 2).ToString());
-                col.Width = 40;
-                if (lvItems.Columns.Count == 1)
-                {
-                    col.Width = 70;
-                }
-            }
-
-            lvItems.Columns[0].Text = "Frame #";
-
-            for (int i = 0; i < signature.Count; i++)
-                item.SubItems.Add(signature[i].ToString());
-
-            lvItems.EnsureVisible(lvItems.Items.Count - 1);
-            item.Selected = true;
-        }
 
         private void Log(string text)
         {
@@ -101,13 +60,9 @@ namespace IRCD
         {
         }
 
-        int nextId = 0;
-
         private void btnClear_Click(object sender, EventArgs e)
         {
-            lvItems.Items.Clear();
-            nextId = 0;
-            UpdateSelected();
+            framesTable.Clear();
         }
 
         private void ClearCurrentItems()
@@ -149,15 +104,16 @@ namespace IRCD
 
         double maxTime = 0;
 
-        private void UpdateSelected()
+        private void UpdateSelected(FramesTable.SelectionChangedArgs e)
         {
             ClearCurrentItems();
 
-            for (int i = 0; i < lvItems.SelectedItems.Count; i++)
+            // TODO:
+            for (int i = 0; i < e.Items.Count; i++)
             {
-                var selectedItem = lvItems.SelectedItems[i];
-                var sign = selectedItem.Tag as List<double>;
-                AddCurrentItem(selectedItem.Text, sign);
+                var selectedItem = e.Items[i];
+                var sign = selectedItem.Signature;
+                AddCurrentItem(selectedItem.Name, sign);
             }
 
             maxTime = maxTime - (maxTime % 10000) + 10000;
@@ -176,9 +132,9 @@ namespace IRCD
             }
         }
 
-        private void lvItems_SelectedIndexChanged(object sender, EventArgs e)
+        private void framesTable_SelectionChangedEvent(object sender, FramesTable.SelectionChangedArgs e)
         {
-            UpdateSelected();
+            UpdateSelected(e);
         }
     }
 }

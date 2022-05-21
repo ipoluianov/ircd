@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionEditDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.framesTable = new IRCD.FramesTable();
             this.SuspendLayout();
             // 
             // label1
@@ -51,11 +52,22 @@
             this.textBox1.Size = new System.Drawing.Size(577, 20);
             this.textBox1.TabIndex = 1;
             // 
+            // framesTable
+            // 
+            this.framesTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.framesTable.Location = new System.Drawing.Point(15, 57);
+            this.framesTable.Name = "framesTable";
+            this.framesTable.Size = new System.Drawing.Size(637, 701);
+            this.framesTable.TabIndex = 2;
+            // 
             // ActionEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 770);
+            this.Controls.Add(this.framesTable);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -70,5 +82,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
+        private FramesTable framesTable;
     }
 }

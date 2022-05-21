@@ -33,7 +33,7 @@
             this.timerCheckPort = new System.Windows.Forms.Timer(this.components);
             this.btnClear = new System.Windows.Forms.Button();
             this.chartFrames = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lvItems = new IRCD.ListViewNoBlink();
+            this.framesTable = new IRCD.FramesTable();
             ((System.ComponentModel.ISupportInitialize)(this.chartFrames)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,28 +66,24 @@
             this.chartFrames.TabIndex = 2;
             this.chartFrames.Text = "chart1";
             // 
-            // lvItems
+            // framesTable
             // 
-            this.lvItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.framesTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvItems.FullRowSelect = true;
-            this.lvItems.HideSelection = false;
-            this.lvItems.Location = new System.Drawing.Point(12, 12);
-            this.lvItems.Name = "lvItems";
-            this.lvItems.Size = new System.Drawing.Size(595, 687);
-            this.lvItems.TabIndex = 0;
-            this.lvItems.UseCompatibleStateImageBehavior = false;
-            this.lvItems.View = System.Windows.Forms.View.Details;
-            this.lvItems.SelectedIndexChanged += new System.EventHandler(this.lvItems_SelectedIndexChanged);
+            this.framesTable.Location = new System.Drawing.Point(12, 12);
+            this.framesTable.Name = "framesTable";
+            this.framesTable.Size = new System.Drawing.Size(595, 687);
+            this.framesTable.TabIndex = 3;
+            this.framesTable.SelectionChangedEvent += new IRCD.FramesTable.SelectionChangedHandler(this.framesTable_SelectionChangedEvent);
             // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 740);
+            this.Controls.Add(this.framesTable);
             this.Controls.Add(this.chartFrames);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.lvItems);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DebugForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -102,7 +98,7 @@
         private System.Windows.Forms.Timer timerCheckPort;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartFrames;
-        private ListViewNoBlink lvItems;
+        private FramesTable framesTable;
     }
 }
 

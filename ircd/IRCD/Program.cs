@@ -26,7 +26,7 @@ namespace IRCD
             private NotifyIcon trayIcon;
             private MainForm mainForm;
             private DebugForm debugForm;
-            private SerialConnector connector = new SerialConnector();
+            //private SerialConnector connector = new SerialConnector();
 
             public MyCustomApplicationContext()
             {
@@ -38,6 +38,8 @@ namespace IRCD
                 trayIcon.Icon = Resources.icon;
                 trayIcon.ContextMenu = new ContextMenu(menuItems.ToArray());
                 trayIcon.Visible = true;
+
+                SerialConnector.Instance().Start();
             }
 
             void OpenSettings(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace IRCD
                     mainForm.Activate();
                     return;
                 }
-                mainForm = new MainForm(connector);
+                mainForm = new MainForm();
                 mainForm.FormClosed += Form_FormClosed;
                 mainForm.ShowDialog();
             }
@@ -59,7 +61,7 @@ namespace IRCD
                     debugForm.Activate();
                     return;
                 }
-                debugForm = new DebugForm(connector);
+                debugForm = new DebugForm();
                 debugForm.FormClosed += DebugForm_FormClosed;
                 debugForm.ShowDialog();
             }

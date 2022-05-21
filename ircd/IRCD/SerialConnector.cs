@@ -10,10 +10,39 @@ namespace IRCD
 {
     public class SerialConnector : IDisposable
     {
+        static SerialConnector instance = null;
+        private static object locker = new object();
+
+        private bool started = false;
+        public void Start() {
+            started = true;
+            timer_.Interval = 100;
+            timer_.Tick += TimerTick;
+            timer_.Start();
+        }
+
+        protected SerialConnector()
+        {
+        }
+
+        public static SerialConnector Instance()
+        {
+            if (instance == null)
+            {
+                lock (locker)
+                {
+                    if (instance == null)
+                    {
+                        instance = new SerialConnector();
+                    }
+                }
+            }
+            return instance;
+        }
+
         private SerialPort port;
         private Timer timer_ = new Timer();
         private Queue<byte[]> logTraffic = new Queue<byte[]>();
-
 
         public class FrameReceivedArgs
         {
@@ -37,13 +66,6 @@ namespace IRCD
         }
         public delegate void LogHandler(object sender, LogArgs e);
         public event LogHandler LogEvent;
-
-        public SerialConnector()
-        {
-            timer_.Interval = 100;
-            timer_.Tick += TimerTick;
-            timer_.Start();
-        }
 
         private void TimerTick(object sender, EventArgs e)
         {
@@ -96,6 +118,9 @@ namespace IRCD
 
         private void checkPort()
         {
+            if (!started)
+                return;
+
             if (port != null)
                 if (port.IsOpen)
                     return;

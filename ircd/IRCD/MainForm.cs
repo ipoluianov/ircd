@@ -5,20 +5,14 @@ namespace IRCD
 {
     public partial class MainForm : Form
     {
-        SerialConnector connector_;
         SerialConnector.FrameReceivedArgs lastEvent;
 
-        public MainForm(SerialConnector connector)
+        public MainForm()
         {
-            connector_ = connector;
-            connector_.FrameReceivedEvent += ConnectorFrameReceivedEvent;
+            //SerialConnector.Instance().FrameReceivedEvent += ConnectorFrameReceivedEvent;
             InitializeComponent();
         }
 
-        private void ConnectorFrameReceivedEvent(object sender, SerialConnector.FrameReceivedArgs e)
-        {
-            lastEvent = e;
-        }
 
         private void LoadItems()
         {
@@ -33,19 +27,20 @@ namespace IRCD
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (lastEvent == null)
+            /*if (lastEvent == null)
                 return;
             Storage.Instance().Load();
             SettingsItem item = new SettingsItem();
             item.Action = DateTime.Now.ToString("HH:mm:ss.fff");
             item.Signature = lastEvent.Signature;
             Storage.Instance().Settings().Items.Add(item);
-            Storage.Instance().Save();
+            Storage.Instance().Save();*/
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
+            ActionEditDialog dialog = new ActionEditDialog();
+            dialog.ShowDialog();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
