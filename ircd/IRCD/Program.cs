@@ -35,7 +35,7 @@ namespace IRCD
                 menuItems.Add(new MenuItem("Debug", OpenDebug));
                 menuItems.Add(new MenuItem("Exit", Exit));
                 trayIcon = new NotifyIcon();
-                trayIcon.Icon = Resources.MainIcon;
+                trayIcon.Icon = Resources.icon;
                 trayIcon.ContextMenu = new ContextMenu(menuItems.ToArray());
                 trayIcon.Visible = true;
             }
