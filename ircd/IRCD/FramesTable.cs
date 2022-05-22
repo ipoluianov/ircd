@@ -31,11 +31,13 @@ namespace IRCD
 
         public class FrameTableItem
         {
-            public FrameTableItem(string name, List<double> signature)
+            public FrameTableItem(int index, string name, List<double> signature)
             {
+                Index = index;
                 Name = name;
                 Signature = signature;
             }
+            public int Index { get; set; }
             public string Name { get; set; }
             public List<double> Signature { get; set; }
         }
@@ -94,12 +96,28 @@ namespace IRCD
         private void lvItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<FrameTableItem> items = new List<FrameTableItem>();
+            int index = 0;
             foreach (var item in lvItems.SelectedItems)
             {
                 ListViewItem lvItem = item as ListViewItem;
-                items.Add(new FrameTableItem(lvItem.Text, lvItem.Tag as List<double>));
+                items.Add(new FrameTableItem(index, lvItem.Text, lvItem.Tag as List<double>));
+                index++;
             }
             SelectionChangedEvent?.Invoke(this, new SelectionChangedArgs(items));
+        }
+
+        public List<FrameTableItem> SelectedItems
+        {
+            get
+            {
+                List<FrameTableItem> items = new List<FrameTableItem>();
+                foreach (var item in lvItems.SelectedItems)
+                {
+                    ListViewItem lvItem = item as ListViewItem;
+                    items.Add(new FrameTableItem(lvItem.Index, lvItem.Text, lvItem.Tag as List<double>));
+                }
+                return items;
+            }
         }
     }
 }

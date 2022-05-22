@@ -35,6 +35,12 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.lvActionLog = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvActions
@@ -47,9 +53,9 @@
             this.columnHeader2});
             this.lvActions.FullRowSelect = true;
             this.lvActions.HideSelection = false;
-            this.lvActions.Location = new System.Drawing.Point(12, 41);
+            this.lvActions.Location = new System.Drawing.Point(12, 70);
             this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(932, 705);
+            this.lvActions.Size = new System.Drawing.Size(377, 676);
             this.lvActions.TabIndex = 0;
             this.lvActions.UseCompatibleStateImageBehavior = false;
             this.lvActions.View = System.Windows.Forms.View.Details;
@@ -67,7 +73,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 12);
+            this.btnAdd.Location = new System.Drawing.Point(12, 41);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 1;
@@ -77,7 +83,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(93, 12);
+            this.btnEdit.Location = new System.Drawing.Point(93, 41);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 2;
@@ -87,7 +93,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(174, 12);
+            this.btnRemove.Location = new System.Drawing.Point(174, 41);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 3;
@@ -95,11 +101,67 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // lvActionLog
+            // 
+            this.lvActionLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lvActionLog.FullRowSelect = true;
+            this.lvActionLog.HideSelection = false;
+            this.lvActionLog.Location = new System.Drawing.Point(395, 70);
+            this.lvActionLog.Name = "lvActionLog";
+            this.lvActionLog.Size = new System.Drawing.Size(549, 676);
+            this.lvActionLog.TabIndex = 4;
+            this.lvActionLog.UseCompatibleStateImageBehavior = false;
+            this.lvActionLog.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Button Name";
+            this.columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Action";
+            this.columnHeader4.Width = 120;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(392, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Actions Log:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Actions:";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(395, 41);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 7;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 758);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lvActionLog);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
@@ -110,6 +172,7 @@
             this.Text = "IRCD";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,5 +184,11 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ListView lvActionLog;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnClear;
     }
 }

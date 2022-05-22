@@ -35,7 +35,10 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAction = new System.Windows.Forms.TextBox();
+            this.framesTableSettings = new IRCD.FramesTable();
             this.framesTable = new IRCD.FramesTable();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -98,25 +101,57 @@
             this.txtAction.TabIndex = 6;
             this.txtAction.TextChanged += new System.EventHandler(this.txtAction_TextChanged);
             // 
+            // framesTableSettings
+            // 
+            this.framesTableSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.framesTableSettings.Location = new System.Drawing.Point(12, 57);
+            this.framesTableSettings.Name = "framesTableSettings";
+            this.framesTableSettings.Size = new System.Drawing.Size(640, 145);
+            this.framesTableSettings.TabIndex = 2;
+            // 
             // framesTable
             // 
             this.framesTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.framesTable.Location = new System.Drawing.Point(15, 57);
+            this.framesTable.Location = new System.Drawing.Point(15, 237);
             this.framesTable.Name = "framesTable";
-            this.framesTable.Size = new System.Drawing.Size(637, 672);
+            this.framesTable.Size = new System.Drawing.Size(637, 492);
             this.framesTable.TabIndex = 2;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(15, 208);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 7;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(96, 208);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 8;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // ActionEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 770);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtAction);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.framesTableSettings);
             this.Controls.Add(this.framesTable);
             this.Controls.Add(this.txtKeyName);
             this.Controls.Add(this.label1);
@@ -139,5 +174,8 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAction;
+        private FramesTable framesTableSettings;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRemove;
     }
 }

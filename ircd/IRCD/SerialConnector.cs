@@ -46,15 +46,15 @@ namespace IRCD
 
         public class FrameReceivedArgs
         {
-            public FrameReceivedArgs(byte[] data, List<double> signature, string action)
+            public FrameReceivedArgs(byte[] data, List<double> signature, SettingsItem detectedItem)
             {
                 Data = data;
                 Signature = signature;
-                Action = action;
+                DetectedItem = detectedItem;
             }
             public byte[] Data { get; }
             public List<double> Signature { get; }
-            public string Action { get; }
+            public SettingsItem DetectedItem { get; }
         }
         public delegate void FrameReceivedHandler(object sender, FrameReceivedArgs e);
         public event FrameReceivedHandler FrameReceivedEvent;
@@ -98,7 +98,7 @@ namespace IRCD
 
                     }
 
-                    string detectedAction = "";
+                    SettingsItem detectedItem = null;
 
                     foreach (var item in Storage.Instance().Settings().Items)
                     {
@@ -107,14 +107,25 @@ namespace IRCD
                             bool same = areSame(signature.Items, times);
                             if (same)
                             {
-                                detectedAction = item.Action;
+                                detectedItem = item;
                                 Log("EVENT:" + item.Action);
                                 break;
                             }
                         }
                     }
 
-                    FrameReceivedEvent?.Invoke(this, new FrameReceivedArgs(buffer, times, detectedAction));
+                    if (detectedItem != null)
+                    {
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                        startInfo.FileName = "cmd.exe";
+                        startInfo.Arguments = "/C " + detectedItem.Action;
+                        process.StartInfo = startInfo;
+                        process.Start();
+                    }
+
+                    FrameReceivedEvent?.Invoke(this, new FrameReceivedArgs(buffer, times, detectedItem));
                 }
             }
         }

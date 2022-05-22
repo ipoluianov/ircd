@@ -10,7 +10,6 @@ namespace IRCD
             InitializeComponent();
         }
 
-
         private void LoadItems()
         {
             Storage.Instance().Load();
@@ -72,7 +71,17 @@ namespace IRCD
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SerialConnector.Instance().FrameReceivedEvent += MainFormFrameReceivedEvent; ;
             LoadItems();
+        }
+
+        private void MainFormFrameReceivedEvent(object sender, SerialConnector.FrameReceivedArgs e)
+        {
+            if (e.DetectedItem != null)
+            {
+                var lvItem = lvActionLog.Items.Add(e.DetectedItem.ButtonName);
+                lvItem.SubItems.Add(e.DetectedItem.Action);
+            }
         }
 
         private void UpdateButtons()
@@ -88,6 +97,11 @@ namespace IRCD
         private void lvActions_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lvActionLog.Items.Clear();
         }
     }
 }
