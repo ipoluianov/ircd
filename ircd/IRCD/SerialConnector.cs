@@ -102,12 +102,15 @@ namespace IRCD
 
                     foreach (var item in Storage.Instance().Settings().Items)
                     {
-                        bool same = areSame(item.Signature, times);
-                        if (same)
+                        foreach (var signature in item.Signatures)
                         {
-                            detectedAction = item.Action;
-                            Log("EVENT:" + item.Action);
-                            break;
+                            bool same = areSame(signature.Items, times);
+                            if (same)
+                            {
+                                detectedAction = item.Action;
+                                Log("EVENT:" + item.Action);
+                                break;
+                            }
                         }
                     }
 

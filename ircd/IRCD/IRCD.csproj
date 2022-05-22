@@ -82,6 +82,7 @@
     <Compile Include="SerialConnector.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Storage.cs" />
+    <Compile Include="Tools.cs" />
     <EmbeddedResource Include="ActionEditDialog.resx">
       <DependentUpon>ActionEditDialog.cs</DependentUpon>
     </EmbeddedResource>

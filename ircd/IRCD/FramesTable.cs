@@ -9,6 +9,10 @@ namespace IRCD
         public FramesTable()
         {
             InitializeComponent();
+        }
+
+        public void StartMonitoring()
+        {
             SerialConnector.Instance().FrameReceivedEvent += ConnectorFrameReceivedEvent;
         }
 

@@ -27,6 +27,7 @@ namespace IRCD
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            framesTable.StartMonitoring();
         }
 
         private string hex(byte[] buffer)
