@@ -11,6 +11,7 @@ namespace IRCD
 {
     public class Storage
     {
+        public static string SerialPortName = "COM7";
         static Storage instance = null;
         private static object locker = new object();
 

@@ -45,9 +45,8 @@
             // 
             // lvActions
             // 
-            this.lvActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
@@ -55,11 +54,12 @@
             this.lvActions.HideSelection = false;
             this.lvActions.Location = new System.Drawing.Point(12, 70);
             this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(377, 676);
+            this.lvActions.Size = new System.Drawing.Size(375, 676);
             this.lvActions.TabIndex = 0;
             this.lvActions.UseCompatibleStateImageBehavior = false;
             this.lvActions.View = System.Windows.Forms.View.Details;
             this.lvActions.SelectedIndexChanged += new System.EventHandler(this.lvActions_SelectedIndexChanged);
+            this.lvActions.DoubleClick += new System.EventHandler(this.lvActions_DoubleClick);
             // 
             // columnHeader1
             // 
@@ -103,6 +103,9 @@
             // 
             // lvActionLog
             // 
+            this.lvActionLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvActionLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4});
@@ -110,7 +113,7 @@
             this.lvActionLog.HideSelection = false;
             this.lvActionLog.Location = new System.Drawing.Point(395, 70);
             this.lvActionLog.Name = "lvActionLog";
-            this.lvActionLog.Size = new System.Drawing.Size(549, 676);
+            this.lvActionLog.Size = new System.Drawing.Size(379, 676);
             this.lvActionLog.TabIndex = 4;
             this.lvActionLog.UseCompatibleStateImageBehavior = false;
             this.lvActionLog.View = System.Windows.Forms.View.Details;
@@ -157,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 758);
+            this.ClientSize = new System.Drawing.Size(784, 758);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

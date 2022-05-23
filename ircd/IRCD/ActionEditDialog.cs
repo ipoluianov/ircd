@@ -15,6 +15,7 @@ namespace IRCD
         public ActionEditDialog()
         {
             InitializeComponent();
+            Tools.CheckWindowSize(this);
             ItemId = 0;
         }
 

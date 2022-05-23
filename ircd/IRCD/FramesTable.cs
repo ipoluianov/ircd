@@ -90,6 +90,7 @@ namespace IRCD
                 item.SubItems.Add(signature[i].ToString());
 
             lvItems.EnsureVisible(lvItems.Items.Count - 1);
+            lvItems.SelectedItems.Clear();
             item.Selected = true;
         }
 

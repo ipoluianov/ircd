@@ -11,6 +11,7 @@ namespace IRCD
             SerialConnector.Instance().LogEvent += ConnectorLogEvent;
             SerialConnector.Instance().FrameReceivedEvent += ConnectorFrameReceivedEvent;
             InitializeComponent();
+            Tools.CheckWindowSize(this);
         }
 
         private void ConnectorFrameReceivedEvent(object sender, SerialConnector.FrameReceivedArgs e)
@@ -83,7 +84,8 @@ namespace IRCD
             var ser = chartFrames.Series.Add(name);
             ser.ChartArea = area.Name;
             ser.BorderWidth = 3;
-            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            //ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            ser.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
 
             double offset = 0;
             double level = 0;

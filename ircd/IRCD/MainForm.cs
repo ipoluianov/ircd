@@ -8,6 +8,7 @@ namespace IRCD
         public MainForm()
         {
             InitializeComponent();
+            Tools.CheckWindowSize(this);
         }
 
         private void LoadItems()
@@ -34,7 +35,7 @@ namespace IRCD
             LoadItems();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void EditItem()
         {
             ActionEditDialog dialog = new ActionEditDialog();
             if (lvActions.SelectedItems.Count != 1)
@@ -45,6 +46,11 @@ namespace IRCD
             dialog.ShowDialog();
 
             LoadItems();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditItem();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -102,6 +108,11 @@ namespace IRCD
         private void btnClear_Click(object sender, EventArgs e)
         {
             lvActionLog.Items.Clear();
+        }
+
+        private void lvActions_DoubleClick(object sender, EventArgs e)
+        {
+            EditItem();
         }
     }
 }

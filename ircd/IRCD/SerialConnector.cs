@@ -114,7 +114,7 @@ namespace IRCD
                         }
                     }
 
-                    if (detectedItem != null)
+                    /*if (detectedItem != null)
                     {
                         System.Diagnostics.Process process = new System.Diagnostics.Process();
                         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -123,7 +123,7 @@ namespace IRCD
                         startInfo.Arguments = "/C " + detectedItem.Action;
                         process.StartInfo = startInfo;
                         process.Start();
-                    }
+                    }*/
 
                     FrameReceivedEvent?.Invoke(this, new FrameReceivedArgs(buffer, times, detectedItem));
                 }
@@ -147,7 +147,7 @@ namespace IRCD
             {
                 try
                 {
-                    port = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
+                    port = new SerialPort(Storage.SerialPortName, 9600, Parity.None, 8, StopBits.One);
                     port.Open();
                     port.DataReceived += Port_DataReceived; ;
                     port.ErrorReceived += Port_ErrorReceived; ;
@@ -203,7 +203,7 @@ namespace IRCD
                 {
                     if (a1[i] > 10)
                     {
-                        double maxDiff = a1[i] * 0.3;
+                        double maxDiff = a1[i] * 0.1;
                         double diff = Math.Abs(a1[i] - a2[i]);
                         if (diff > maxDiff)
                         {
