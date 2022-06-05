@@ -120,5 +120,19 @@ namespace IRCD
                 return items;
             }
         }
+
+        public List<FrameTableItem> Items
+        {
+            get
+            {
+                List<FrameTableItem> items = new List<FrameTableItem>();
+                foreach (var item in lvItems.Items)
+                {
+                    ListViewItem lvItem = item as ListViewItem;
+                    items.Add(new FrameTableItem(lvItem.Index, lvItem.Text, lvItem.Tag as List<double>));
+                }
+                return items;
+            }
+        }
     }
 }

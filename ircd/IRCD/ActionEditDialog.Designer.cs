@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionEditDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.txtKeyName = new System.Windows.Forms.TextBox();
@@ -35,10 +36,14 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAction = new System.Windows.Forms.TextBox();
-            this.framesTableSettings = new IRCD.FramesTable();
-            this.framesTable = new IRCD.FramesTable();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.btnLearn = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.framesTableSettings = new IRCD.FramesTable();
+            this.framesTable = new IRCD.FramesTable();
+            this.framesTableSettingsRep = new IRCD.FramesTable();
             this.SuspendLayout();
             // 
             // label1
@@ -102,28 +107,9 @@
             this.txtAction.TabIndex = 6;
             this.txtAction.TextChanged += new System.EventHandler(this.txtAction_TextChanged);
             // 
-            // framesTableSettings
-            // 
-            this.framesTableSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.framesTableSettings.Location = new System.Drawing.Point(12, 57);
-            this.framesTableSettings.Name = "framesTableSettings";
-            this.framesTableSettings.Size = new System.Drawing.Size(640, 145);
-            this.framesTableSettings.TabIndex = 2;
-            // 
-            // framesTable
-            // 
-            this.framesTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.framesTable.Location = new System.Drawing.Point(15, 237);
-            this.framesTable.Name = "framesTable";
-            this.framesTable.Size = new System.Drawing.Size(637, 492);
-            this.framesTable.TabIndex = 2;
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(15, 208);
+            this.btnAdd.Location = new System.Drawing.Point(15, 483);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 7;
@@ -133,7 +119,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(96, 208);
+            this.btnRemove.Location = new System.Drawing.Point(96, 483);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 8;
@@ -141,12 +127,68 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStatus.Location = new System.Drawing.Point(66, 83);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(176, 51);
+            this.lblStatus.TabIndex = 9;
+            this.lblStatus.Text = "-----------";
+            // 
+            // btnLearn
+            // 
+            this.btnLearn.Location = new System.Drawing.Point(75, 57);
+            this.btnLearn.Name = "btnLearn";
+            this.btnLearn.Size = new System.Drawing.Size(75, 23);
+            this.btnLearn.TabIndex = 10;
+            this.btnLearn.Text = "Set Up";
+            this.btnLearn.UseVisualStyleBackColor = true;
+            this.btnLearn.Click += new System.EventHandler(this.btnLearn_Click);
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // framesTableSettings
+            // 
+            this.framesTableSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.framesTableSettings.Location = new System.Drawing.Point(15, 137);
+            this.framesTableSettings.Name = "framesTableSettings";
+            this.framesTableSettings.Size = new System.Drawing.Size(640, 145);
+            this.framesTableSettings.TabIndex = 2;
+            // 
+            // framesTable
+            // 
+            this.framesTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.framesTable.Location = new System.Drawing.Point(15, 512);
+            this.framesTable.Name = "framesTable";
+            this.framesTable.Size = new System.Drawing.Size(637, 217);
+            this.framesTable.TabIndex = 2;
+            // 
+            // framesTableSettingsRep
+            // 
+            this.framesTableSettingsRep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.framesTableSettingsRep.Location = new System.Drawing.Point(15, 288);
+            this.framesTableSettingsRep.Name = "framesTableSettingsRep";
+            this.framesTableSettingsRep.Size = new System.Drawing.Size(640, 145);
+            this.framesTableSettingsRep.TabIndex = 11;
+            // 
             // ActionEditDialog
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 770);
+            this.Controls.Add(this.framesTableSettingsRep);
+            this.Controls.Add(this.btnLearn);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtAction);
@@ -179,5 +221,9 @@
         private FramesTable framesTableSettings;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnLearn;
+        private System.Windows.Forms.Timer timer;
+        private FramesTable framesTableSettingsRep;
     }
 }

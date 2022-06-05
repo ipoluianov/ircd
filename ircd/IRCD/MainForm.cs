@@ -85,7 +85,7 @@ namespace IRCD
         {
             if (e.DetectedItem != null)
             {
-                var lvItem = lvActionLog.Items.Add(e.DetectedItem.ButtonName);
+                var lvItem = lvActionLog.Items.Add(e.DetectedItem.ButtonName + (e.Repetition ? " (rep)" : ""));
                 lvItem.SubItems.Add(e.DetectedItem.Action);
             }
         }

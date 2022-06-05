@@ -22,12 +22,14 @@ namespace IRCD
         public SettingsItem()
         {
             Signatures = new List<Signature>();
+            SignaturesRepetitions = new List<Signature>();
         }
    
         public int Id { get; set; }
         public string ButtonName { get; set; }
         public string Action { get; set; }
         public List<Signature> Signatures { get; set; }
+        public List<Signature> SignaturesRepetitions { get; set; }
 
         public SettingsItem Clone()
         {

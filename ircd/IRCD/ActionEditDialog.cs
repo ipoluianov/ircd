@@ -60,6 +60,10 @@ namespace IRCD
             framesTableSettings.Clear();
             foreach(var sig in currentItem.Signatures)
                 framesTableSettings.AddToReceivedFrames(sig.Items);
+
+            framesTableSettingsRep.Clear();
+            foreach (var sig in currentItem.SignaturesRepetitions)
+                framesTableSettingsRep.AddToReceivedFrames(sig.Items);
         }
 
         private void SaveData()
@@ -100,8 +104,34 @@ namespace IRCD
             currentItem.Action = txtAction.Text;
         }
 
+        private void ProcessAndAdd()
+        {
+            if (framesTable.Items.Count > 1)
+            {
+                {
+                    var frameKeyCode = framesTable.Items[0];
+                    Signature sig = new Signature();
+                    sig.Items = frameKeyCode.Signature;
+                    currentItem.Signatures.Add(sig);
+                    LoadData();
+                }
+
+                {
+                    var frameRepetition = framesTable.Items[1];
+                    Signature sig = new Signature();
+                    sig.Items = frameRepetition.Signature;
+                    currentItem.SignaturesRepetitions.Add(sig);
+                    LoadData();
+                }
+
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            ProcessAndAdd();
+            return;
+
             int count = 0;
             foreach (var item in framesTable.SelectedItems)
             {
@@ -144,6 +174,31 @@ namespace IRCD
             int indexToRemove = framesTableSettings.SelectedItems[0].Index;
             currentItem.Signatures.RemoveAt(indexToRemove);
             LoadData();
+        }
+
+        bool lProcessing = false;
+
+        private void btnLearn_Click(object sender, EventArgs e)
+        {
+            //currentItem.Signatures.Clear();
+            //LoadData();
+            framesTable.Clear();
+            lProcessing = true;
+            lblStatus.Text = "Press and Button";
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (!lProcessing)
+                return;
+
+            if (framesTable.Items.Count > 3)
+            {
+
+                ProcessAndAdd();
+                lblStatus.Text = "Complete";
+                lProcessing = false;
+            }
         }
     }
 }

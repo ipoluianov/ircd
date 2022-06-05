@@ -16,7 +16,7 @@ namespace IRCD
         private bool started = false;
         public void Start() {
             started = true;
-            timer_.Interval = 100;
+            timer_.Interval = 50;
             timer_.Tick += TimerTick;
             timer_.Start();
         }
@@ -44,17 +44,22 @@ namespace IRCD
         private Timer timer_ = new Timer();
         private Queue<byte[]> logTraffic = new Queue<byte[]>();
 
+        private SettingsItem lastDetectedItem = null;
+        private DateTime lastDetectedItemDT = DateTime.Now;
+
         public class FrameReceivedArgs
         {
-            public FrameReceivedArgs(byte[] data, List<double> signature, SettingsItem detectedItem)
+            public FrameReceivedArgs(byte[] data, List<double> signature, SettingsItem detectedItem, bool repetition)
             {
                 Data = data;
                 Signature = signature;
                 DetectedItem = detectedItem;
+                Repetition = repetition;
             }
             public byte[] Data { get; }
             public List<double> Signature { get; }
             public SettingsItem DetectedItem { get; }
+            public bool Repetition { get; }
         }
         public delegate void FrameReceivedHandler(object sender, FrameReceivedArgs e);
         public event FrameReceivedHandler FrameReceivedEvent;
@@ -99,20 +104,54 @@ namespace IRCD
                     }
 
                     SettingsItem detectedItem = null;
+                    bool isRepetition = false;
 
-                    foreach (var item in Storage.Instance().Settings().Items)
+                    double repetitionMaxDelay = 300;
+
+                    // Determine repetitions
+                    if (lastDetectedItem != null)
                     {
-                        foreach (var signature in item.Signatures)
+                        if (DateTime.Now.Subtract(lastDetectedItemDT).TotalMilliseconds < repetitionMaxDelay)
                         {
-                            bool same = areSame(signature.Items, times);
-                            if (same)
+                            foreach (var signature in lastDetectedItem.SignaturesRepetitions)
                             {
-                                detectedItem = item;
-                                Log("EVENT:" + item.Action);
-                                break;
+                                bool same = AreSame(signature.Items, times);
+                                if (same)
+                                {
+                                    detectedItem = lastDetectedItem;
+                                    isRepetition = true;
+                                    lastDetectedItemDT = DateTime.Now;
+                                    Log("EVENT:" + lastDetectedItem.Action + " rep");
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (detectedItem == null)
+                        {
+                            lastDetectedItem = null;
+                        }
+                    }
+
+                    if (detectedItem == null)
+                    {
+                        foreach (var item in Storage.Instance().Settings().Items)
+                        {
+                            foreach (var signature in item.Signatures)
+                            {
+                                bool same = AreSame(signature.Items, times);
+                                if (same)
+                                {
+                                    detectedItem = item;
+                                    lastDetectedItemDT = DateTime.Now;
+                                    Log("EVENT:" + item.Action);
+                                    break;
+                                }
                             }
                         }
                     }
+
+                    lastDetectedItem = detectedItem;
 
                     /*if (detectedItem != null)
                     {
@@ -125,7 +164,7 @@ namespace IRCD
                         process.Start();
                     }*/
 
-                    FrameReceivedEvent?.Invoke(this, new FrameReceivedArgs(buffer, times, detectedItem));
+                    FrameReceivedEvent?.Invoke(this, new FrameReceivedArgs(buffer, times, detectedItem, isRepetition));
                 }
             }
         }
@@ -193,7 +232,7 @@ namespace IRCD
         {
         }
 
-        private bool areSame(List<double> a1, List<double> a2)
+        static public bool AreSame(List<double> a1, List<double> a2)
         {
             bool result = true;
 
@@ -203,7 +242,7 @@ namespace IRCD
                 {
                     if (a1[i] > 10)
                     {
-                        double maxDiff = a1[i] * 0.1;
+                        double maxDiff = a1[i] * 0.4; // TODO: settings
                         double diff = Math.Abs(a1[i] - a2[i]);
                         if (diff > maxDiff)
                         {
