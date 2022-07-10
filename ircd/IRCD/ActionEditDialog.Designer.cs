@@ -35,7 +35,6 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtAction = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -44,6 +43,10 @@
             this.framesTableSettings = new IRCD.FramesTable();
             this.framesTable = new IRCD.FramesTable();
             this.framesTableSettingsRep = new IRCD.FramesTable();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtAction = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -97,16 +100,6 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Action:";
             // 
-            // txtAction
-            // 
-            this.txtAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAction.Location = new System.Drawing.Point(75, 31);
-            this.txtAction.Name = "txtAction";
-            this.txtAction.Size = new System.Drawing.Size(577, 20);
-            this.txtAction.TabIndex = 6;
-            this.txtAction.TextChanged += new System.EventHandler(this.txtAction_TextChanged);
-            // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(15, 483);
@@ -158,7 +151,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.framesTableSettings.Location = new System.Drawing.Point(15, 137);
             this.framesTableSettings.Name = "framesTableSettings";
-            this.framesTableSettings.Size = new System.Drawing.Size(640, 145);
+            this.framesTableSettings.Size = new System.Drawing.Size(640, 41);
             this.framesTableSettings.TabIndex = 2;
             // 
             // framesTable
@@ -175,10 +168,47 @@
             // 
             this.framesTableSettingsRep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.framesTableSettingsRep.Location = new System.Drawing.Point(15, 288);
+            this.framesTableSettingsRep.Location = new System.Drawing.Point(15, 197);
             this.framesTableSettingsRep.Name = "framesTableSettingsRep";
-            this.framesTableSettingsRep.Size = new System.Drawing.Size(640, 145);
+            this.framesTableSettingsRep.Size = new System.Drawing.Size(640, 47);
             this.framesTableSettingsRep.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Key Code";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 181);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Key Repeat Code";
+            // 
+            // txtAction
+            // 
+            this.txtAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAction.Location = new System.Drawing.Point(75, 31);
+            this.txtAction.Name = "txtAction";
+            this.txtAction.Size = new System.Drawing.Size(577, 20);
+            this.txtAction.TabIndex = 6;
+            this.txtAction.TextChanged += new System.EventHandler(this.txtAction_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(474, 483);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(181, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Взять с другой клавиши";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ActionEditDialog
             // 
@@ -186,6 +216,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 770);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.framesTableSettingsRep);
             this.Controls.Add(this.btnLearn);
             this.Controls.Add(this.lblStatus);
@@ -217,7 +250,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtAction;
         private FramesTable framesTableSettings;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
@@ -225,5 +257,9 @@
         private System.Windows.Forms.Button btnLearn;
         private System.Windows.Forms.Timer timer;
         private FramesTable framesTableSettingsRep;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtAction;
+        private System.Windows.Forms.Button button1;
     }
 }
